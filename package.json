@@ -2,7 +2,7 @@
   "name": "nodejs_mongodb",
   "version": "1.0.0",
   "description": "NODEJS MONGO DB",
-  "main": "server.js",
+  "main": "nodemon server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

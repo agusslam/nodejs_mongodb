@@ -1,19 +1,25 @@
-//deklarasi include modules
+//mEMBUAT Node JS
+const http = require("http")
+const fs = require("fs")
 const express = require('express')
-const cors = require('cors')
+const bodyParser = require('body-parser')
+const port = 8002
+const app = express()
 const routes = require('./Routes/routes')
 
-//definisi app
-const app = express()
-const port = 8002
 
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 app.use(routes)
+
+app.set('view engine', 'ejs')
+
+app.use('/', express.static('public'));
+
+app.listen(port, () => { console.log(`Server ready on ${port}`) })
 
 //models
 const ConnectionMongoDB = require('./Models/Connection')
 ConnectionMongoDB()
-
-app.listen(port, () => {console.log(`Server is running on port ${port}`)})
