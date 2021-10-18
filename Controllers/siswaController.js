@@ -114,7 +114,10 @@ exports.siswaUpdatePost = (req,res) => {
 }
 
 exports.siswaView = (req, res) => {
-    res.render('index');
+    res.render('index', {
+        message:"success get data",
+        key: null
+    }  )
 }
 
 exports.postNewSiswa = (req,res) => {
@@ -128,7 +131,7 @@ exports.postNewSiswa = (req,res) => {
     })
 
     siswa.save(siswa).then(response => {
-        res.render('index')
+        res.render('index', {message: "Success Add Data"})
     }).catch(err => {
         res.send({
             message: 'failed create data'
@@ -142,7 +145,7 @@ exports.delNewSiswa = (req,res) => {
             idsiswa: req.params.id
         }
     ).then(response => {
-        res.render('index')
+        res.render('index', {message: "Success Delete Data"})
     }).catch(err => {
         res.send({
             message: `Failed Delete ${err}` 
@@ -185,10 +188,50 @@ exports.siswaUpdOne = (req,res) => {
                 upsert: true
             }
     ).then(response => {
-        res.render('index')
+        res.render('index', {message: "Success Update Data"})
     }).catch(err => {
         res.send({
             message: `Failed Update data ${err}`
+        })
+    })
+}
+
+exports.siswaSearch = (req,res) => {
+    let keySearch = req.body.key
+    // console.log(keySearch)
+    siswaModel.find(
+        {
+            nama: { $regex: keySearch }
+        }
+    ).then(response => {
+        res.render('index', 
+            {
+            message: "search",
+            result: response
+            }
+        )  
+    }).catch(err => {
+        res.send({
+            message: `Failed Get By Key Search ${err}`
+        })
+    })
+}
+
+exports.siswaSearchList = (req,res) => {
+    let keySearch = req.body.key
+    // console.log(keySearch)
+    siswaModel.find(
+        {
+            nama: { $regex: keySearch }
+        }
+    ).then(response => {
+        res.send({
+            message: "success",
+            result: response
+        })   
+    }).catch(err => {
+        res.send({
+            message: `Failed Get By Key Search ${err}`
         })
     })
 }

@@ -19,9 +19,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Masukkan Nama Siswa" aria-label="Search">
-                <button class="btn btn-outline-light" type="submit">Cari</button>
+            <form class="d-flex" method="POST" action="/get-siswa-search">
+                <input class="form-control me-2 search-siswa" type="text" placeholder="Masukkan Nama Siswa" aria-label="Search" name="key">
+                <button id="btn-search" class="btn btn-outline-light" type="submit">Cari</button>
             </form>
             </div>
         </div>
@@ -87,7 +87,30 @@
                       </div>                      
                   </div>
                   <div class="wrapper-over">
+                      <% if(message == 'search'){ %>
+                        <% for(let i=0 ; i < result.length ; i++){ %>
+                            <div class="row wrap">
+                                <div class="col-md-1 col-idsiswa">
+                                    <p><%= result[i].idsiswa %></p>
+                                </div> 
+                                <div class="col-md-3 col-namasiswa">
+                                    <p><%= result[i].nama %></p>
+                                </div>
+                                <div class="col-md-3 col-emailsiswa">
+                                    <p><%= result[i].email %></p>
+                                </div>
+                                <div class="col-md-3 col-addressiswa">
+                                    <p><%= result[i].address %></p>
+                                </div>   
+                                <div class="col-md-2 col-aksi">
+                                    <a href="/siswa-view/<%= result[i].idsiswa %>">Edit</a> 
+                                    | 
+                                    <a href="/siswa-del/<%= result[i].idsiswa %>">Delete</a>
+                                </div>
+                            </div>
+                        <% } %>
 
+                     <% } %>
                   </div>
                 </div>
             </div>
@@ -97,38 +120,43 @@
       </div>
       <script type="text/javascript" src="/plugin/bootstrap/js/bootstrap.bundle.js"></script>
       <script type="text/javascript">
-        fetch('/siswa-all')
-            .then(response => { return response.json() })
-            .then(result =>{
-                let data = result
-                console.log(data.result)
-                const tabEl = document.querySelector('.wrapper-over') 
-                for(let i=0 ; i<data.result.length ; i++){
-                    tabEl.innerHTML += `
-                                    <div class="row wrap">
-                                        <div class="col-md-1 col-idsiswa">
-                                            <p>${data.result[i].idsiswa}</p>
-                                        </div> 
-                                        <div class="col-md-3 col-namasiswa">
-                                            <p>${data.result[i].nama}</p>
+            let message = '<%= message %>'
+            if(message != "search"){
+                //function ShowData
+                fetch('/siswa-all')
+                .then(response => { return response.json() })
+                .then(result =>{                    
+                    let data = result
+                    console.log(data.result)
+                    const tabEl = document.querySelector('.wrapper-over') 
+                    for(let i=0 ; i<data.result.length ; i++){
+                        tabEl.innerHTML += `
+                                        <div class="row wrap">
+                                            <div class="col-md-1 col-idsiswa">
+                                                <p>${data.result[i].idsiswa}</p>
+                                            </div> 
+                                            <div class="col-md-3 col-namasiswa">
+                                                <p>${data.result[i].nama}</p>
+                                            </div>
+                                            <div class="col-md-3 col-emailsiswa">
+                                                <p>${data.result[i].email}</p>
+                                            </div>
+                                            <div class="col-md-3 col-addressiswa">
+                                                <p>${data.result[i].address}</p>
+                                            </div>   
+                                            <div class="col-md-2 col-aksi">
+                                                <a href="/siswa-view/${data.result[i].idsiswa}">Edit</a> 
+                                                | 
+                                                <a href="/siswa-del/${data.result[i].idsiswa}">Delete</a>
+                                            </div>
                                         </div>
-                                        <div class="col-md-3 col-emailsiswa">
-                                            <p>${data.result[i].email}</p>
-                                        </div>
-                                        <div class="col-md-3 col-addressiswa">
-                                            <p>${data.result[i].address}</p>
-                                        </div>   
-                                        <div class="col-md-2 col-aksi">
-                                            <a href="/siswa-view/${data.result[i].idsiswa}">Edit</a> 
-                                            | 
-                                            <a href="/siswa-del/${data.result[i].idsiswa}">Delete</a>
-                                        </div>
-                                    </div>
-                    
-                    `
-                }                
-            })
-            .catch(err => { console.log(`Error : ${err}`) })
+                        
+                        `
+                    }                
+                })
+                .catch(err => { console.log(`Error : ${err}`) })
+            }
+                 
       </script>
 </body>
 </html>

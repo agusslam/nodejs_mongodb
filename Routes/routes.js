@@ -17,6 +17,8 @@ routes.get('/siswa-del/:id', siswaController.delNewSiswa)
 routes.get('/siswa-api/:id', siswaController.siswaApi)
 routes.get('/siswa-view/:id', siswaController.siswaApi)
 routes.post('/siswa-upd/:id', siswaController.siswaUpdOne)
+routes.post('/get-siswa-search', siswaController.siswaSearch)
+routes.get('/get-siswa-searchlist', siswaController.siswaSearchList)
 
 
 module.exports = routes
