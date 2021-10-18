@@ -1,3 +1,7 @@
+.bg-custom {
+    background-color: #55ACEE;
+}
+
 .container-fluid .wrapper-form {
     padding-left: 5%;
     padding-right: 5%;
@@ -9,6 +13,7 @@
 
 .container-fluid .form-tambah .wrapper-input {
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .container-fluid .daftar-siswa {
@@ -17,4 +22,16 @@
 
 .wrap {
     border: 1px solid gray;
+    text-align: center;
+}
+
+.wrapper-tambah {
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+.wrap-head {
+    background-color: rgba(85, 172, 238, 0.5);
+    text-align: center;
+    font-weight: 400;
 }
