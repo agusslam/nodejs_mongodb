@@ -1,0 +1,20 @@
+.container-fluid .wrapper-form {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.container-fluid .form-tambah {
+    margin-top: 25px;
+}
+
+.container-fluid .form-tambah .wrapper-input {
+    margin-top: 10px;
+}
+
+.container-fluid .daftar-siswa {
+    margin-top: 25px;
+}
+
+.wrap {
+    border: 1px solid gray;
+}

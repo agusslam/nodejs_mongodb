@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD NodeJS MongoDB</title>
+    <link rel="stylesheet" href="/plugin/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- start navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">LOGO</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  User
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Profil</a></li>
+                  <li><a class="dropdown-item" href="#">Ubah Password</a></li>                  
+                </ul>
+              </li>              
+            </ul>            
+          </div>
+        </div>
+      </nav>
+
+      <div class="container-fluid">
+          <div class="wrapper-form">
+            <div class="row form-tambah">
+                <div class="col-md-12">
+                    <h3>Edit Data Siswa</h3>
+                </div>
+                <div class="col-md-12">
+                  <form id="input-form" method="POST" action="/siswa-upd/<%= data.idsiswa %>">
+                      <div class="row wrapper-input">
+                          <div class="col-md-6">
+                              <label for="inputId" class="form-label">ID Siswa</label>
+                              <input type="text" class="form-control" id="inputId" name="idsiswa" value="<%= data.idsiswa %>" readonly>
+                          </div>
+                          <div class="col-md-6">
+                              <label for="inputNama" class="form-label">Nama Siswa</label>
+                              <input type="text" class="form-control" id="inputNama" name="nama" value="<%= data.nama %>">
+                          </div>
+                      </div>
+                      <div class="row wrapper-input">
+                          <div class="col-md-6">
+                              <label for="inputEmail" class="form-label">Email Siswa</label>
+                              <input type="text" class="form-control" id="inputEmail" name="email" value="<%= data.email %>">
+                          </div>
+                          <div class="col-md-6">
+                              <label for="inputAlamat" class="form-label">Alamat Siswa</label>
+                              <input type="text" class="form-control" id="inputAlamat" name="address" value="<%= data.address %>">
+                          </div>
+                      </div>
+                      <div class="col-md-12 wrapper-input">
+                          <input type="submit" value="Kirim" class="styleSub w-100" id="btnSubmit">
+                      </div>
+      
+      
+                  </form>
+                </div>
+            </div>            
+
+          </div>
+          
+      </div>
+      <script type="text/javascript" src="/plugin/bootstrap/js/bootstrap.bundle.js"></script>
+</body>
+</html>

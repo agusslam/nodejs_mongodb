@@ -96,3 +96,99 @@ exports.nestedMatpel = (req,res) => {
         })
     })
 }
+
+exports.siswaUpdatePost = (req,res) => {
+    let data = {
+        nama: req.body.nama
+    }
+    siswaModel.updateOne({idsiswa: req.body.id}, {$set: data})
+    .then(response => {
+        res.send({
+            message: "Successfully Update"
+        })
+    }).catch(err => {
+        res.send({
+            message: `Failed Update Data ${err}`
+        })
+    })
+}
+
+exports.siswaView = (req, res) => {
+    res.render('index');
+}
+
+exports.postNewSiswa = (req,res) => {
+    // res.send('tampilan create')
+    const siswa = new siswaModel({
+        idsiswa : req.body.idsiswa,
+        nama : req.body.nama,
+        email: req.body.email,
+        address: req.body.address,
+        age: req.body.age,
+    })
+
+    siswa.save(siswa).then(response => {
+        res.render('index')
+    }).catch(err => {
+        res.send({
+            message: 'failed create data'
+        })
+    })
+}
+
+exports.delNewSiswa = (req,res) => {
+    siswaModel.deleteOne(
+        {
+            idsiswa: req.params.id
+        }
+    ).then(response => {
+        res.render('index')
+    }).catch(err => {
+        res.send({
+            message: `Failed Delete ${err}` 
+        })
+    })
+}
+
+exports.siswaApi = (req,res) => {
+    let id = req.params.id
+    siswaModel.findOne(
+        {
+            idsiswa: req.params.id
+        }
+    ).then(response => {
+        res.render('update', { data: response })        
+    }).catch(response => {
+        res.send({
+            message: "Failed Nested Matpel"
+        })
+    })
+}
+
+exports.siswaViewId = (req,res) => {
+    let idData = req.params.id
+    res.render('update', { data: response })
+}
+
+exports.siswaUpdOne = (req,res) => {
+    // console.log(req.params.id)
+    siswaModel.updateOne(
+        { idsiswa: req.params.id },
+        { $set: 
+            {
+                nama: req.body.nama,
+                email: req.body.email,
+                address: req.body.address,
+                age: req.body.age,
+            }},
+            {
+                upsert: true
+            }
+    ).then(response => {
+        res.render('index')
+    }).catch(err => {
+        res.send({
+            message: `Failed Update data ${err}`
+        })
+    })
+}
